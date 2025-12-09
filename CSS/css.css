@@ -1,0 +1,808 @@
+/* CSS Variables - Globale variabler */
+:root {
+  /* Farver */
+  --primary: #8C1215;        /* Hovedfarve - rød */
+  --secondary: #FDFDFD;       /* Sekundær - hvid */
+  --primary-light: #bbb8ab;   /* Lys brun */
+  --secondary-light: #3c4043; /* Mørk grå */
+  --text: #222427;            /* Tekstfarve */
+  --bg: #F3F0E7;             /* Baggrund */
+  --bgt: #E7E5DC;            /* Baggrund transition */
+  --bg-card: #FDFDFD;        /* Kort baggrund */
+  --error: #ea4335;          /* Fejlfarve */
+
+  /* Effekter */
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);     /* Standard skygge */
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4); /* Stor skygge */
+  --radius: 1rem;            /* Afrundede hjørner */
+  --transition: 250ms ease;   /* Animation hastighed */
+
+  /* Størrelser */
+  --icon-size: 40px;         /* Ikon størrelse */
+  --header-padding: 1rem;    /* Header padding */
+  --card-width: 20rem;       /* Kort bredde */
+  --badge-size: 6rem;        /* Badge størrelse */
+}
+
+/* Global Reset - Fjerner browser defaults */
+* {
+  box-sizing: border-box;  /* Inkluderer padding i bredde */
+  margin: 0;
+  padding: 0;
+}
+
+/* Body styling */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bgt) 50%, var(--primary-light) 100%);
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Roterende baggrundsbillede */
+body::before {
+  content: '';
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  width: 60vw;
+  height: 60vw;
+  transform: translate(-50%, -50%);
+  background-image: url('../img/roterende.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: rotate360 15s linear infinite;  /* Roterer hvert 15. sekund */
+  z-index: -1;
+  pointer-events: none;  /* Kan ikke klikkes */
+}
+
+/* Layout - Hovedcontainer */
+main {
+  max-width: min(1400px, 95vw);  /* Max bredde */
+  margin: 0 auto;                /* Centreret */
+  padding: clamp(1rem, 1vw, 6rem) 1rem 2rem;
+}
+
+/* Intro sektion */
+#intro {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+}
+
+/* Header Navigation */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--header-padding);
+  position: relative;
+}
+
+/* Navigation ikoner */
+.menu-icon,
+.nav-icon {
+  background: none;
+  border: none;
+  color: var(--secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: var(--transition);
+}
+
+/* Hover effekt på ikoner */
+.menu-icon:hover,
+.nav-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Navigation container */
+.header-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+/* SVG ikoner */
+.menu-icon svg,
+.nav-icon svg {
+  fill: white;
+  width: 40px;
+  height: 40px;  /* Ændr for at gøre ikonerne større/mindre */
+}
+
+/* Wallpaper & Intro */
+#wallpaper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1000;
+}
+
+/* Intro kort positioner */
+.ugens-spil-left,
+.ugens-spil-center,
+.ugens-spil-right {
+  flex: 0 0 auto;  /* Ingen flex vækst/skrumpning */
+}
+
+/* Hoved intro kort */
+.ugens-spil {
+  background: var(--bg-card);      /* Hvid baggrund */
+  border-radius: var(--radius);    /* Runde hjørner */
+  box-shadow: var(--shadow);       /* Skygge */
+  overflow: visible;               /* Lader badge stikke ud */
+  transition: var(--transition);   /* Smooth animationer */
+  border: 1px solid rgba(255, 255, 255, 0.2);  /* Tynd kant */
+  width: var(--card-width);        /* Fast bredde */
+  margin: 0 auto 2rem auto;        /* Centreret */
+  position: relative;              /* For badge placering */
+  z-index: 10;                     /* Foran baggrund */
+}
+
+.ugens-spil:focus {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Hjørne badge */
+.ugens-spil .corner-badge {
+  position: absolute;                    /* Placeret i forhold til kort */
+  top: -1rem;                           /* Over kortets kant */
+  left: -1rem;                          /* Til venstre for kortets kant */
+  width: var(--badge-size);             /* Badge bredde */
+  height: var(--badge-size);            /* Badge højde (cirkel) */
+  
+  display: flex;                        /* Centrerer indhold */
+  align-items: center;                  /* Vertikal centrering */
+  justify-content: center;              /* Horisontal centrering */
+  
+  background: radial-gradient(#fff310, #ffa600);  /* Gul gradient */
+  color: var(--secondary);             /* Hvid tekst */
+  font-weight: 700;                    /* Fed tekst */
+  font-size: 1.5rem;                   /* Stor tekst */
+  border-radius: 50%;                  /* Cirkel form */
+  box-shadow: var(--shadow);           /* Skygge */
+  z-index: 5;                          /* Foran kort */
+  text-align: center;                  /* Centreret tekst */
+  padding: 0.25rem;                    /* Indre afstand */
+  rotate: -15deg;                      /* Roteret look */
+  
+  text-shadow:                         /* Kant effekt på tekst */
+    -1px -1px 0 var(--text),
+     1px -1px 0 var(--text),
+    -1px  1px 0 var(--text),
+     1px  1px 0 var(--text);
+}
+
+
+/* Filter System */
+.filterbartop {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 0rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(172, 198, 201, 0.1);
+  position:sticky;
+  top:0;
+  left:0;
+  width: 100%;
+  z-index: 500;
+}
+
+/* Mobil filter panel */
+.filterbarbot {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 0rem;
+  margin-top: 1rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(172, 198, 201, 0.1);
+  position: fixed;              /* Fast position */
+  width: 20rem;
+  z-index: 1100;               /* Over andet indhold */
+  right: 1rem;                 /* Højre hjørne */
+  bottom: 1rem;                /* Bund af skærm */
+}
+
+/* Toggle knap til mobil filter */
+.filterbarbot-toggle {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid rgba(172, 198, 201, 0.3);
+  border-radius: var(--radius);
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: var(--transition);
+  width: 100%;
+}
+
+/* Hover effekt */
+.filterbarbot-toggle:hover {
+  background: var(--bgt);
+  border-color: var(--secondary);
+}
+
+/* Pil ikon */
+.filterbarbot-toggle::after {
+  content: "▼";
+  font-size: 0.75rem;
+  transition: transform var(--transition);
+}
+
+/* Roteret pil når aktiv */
+.filterbarbot-toggle.active::after {
+  transform: rotate(180deg);
+}
+
+/* Filter indhold (skjult som standard) */
+.filterbarbot-content {
+  display: none;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border-top: 1px solid rgba(172, 198, 201, 0.1);
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filterbarbot-content.active {
+  display: flex;
+}
+
+/* Filter rækker */
+.filter-row-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-row-ranges {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Filter grupper */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+}
+
+/* Range grupper */
+.range-group {
+  flex: 1;
+}
+
+.range-label {
+  margin-bottom: 0.5rem;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Range separator */
+.range-separator {
+  color: var(--secondary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Input felter */
+#search-input,
+#genre-select,
+#sort-select,
+#year-from,
+#year-to,
+#rating-from,
+#rating-to {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid rgba(172, 198, 201, 0.3);
+  border-radius: calc(var(--radius) * 0.5);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  width: 100%;
+}
+
+/* Focus state på input felter */
+#search-input:focus,
+#genre-select:focus,
+#sort-select:focus,
+#year-from:focus,
+#year-to:focus,
+#rating-from:focus,
+#rating-to:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(172, 198, 201, 0.2);
+}
+
+/* Placeholder tekst */
+#search-input::placeholder,
+#year-from::placeholder,
+#year-to::placeholder,
+#rating-from::placeholder,
+#rating-to::placeholder {
+  color: var(--text);
+  opacity: 0.6;
+}
+
+#genre-select,
+#sort-select {
+  cursor: pointer;
+}
+
+/* Search group særlig styling */
+.search-group {
+  grid-column: 1 / 2;
+}
+
+/* Header & Footer */
+header {
+  background: var(--primary);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(172, 198, 201, 0.2);
+  color: var(--text);
+  padding: 1rem 0;
+  text-align: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: var(--transition);
+  font-family: "Lobster", cursive;
+}
+
+header h1 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--secondary);
+}
+
+header h2 {
+  font-size: clamp(1rem, 3vw, 1,5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--secondary);
+}
+
+footer {
+  background: var(--primary);
+  color: var(--secondary);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+}
+
+/* (main er allerede defineret ovenfor - dublet fjernet) */
+
+/* =====================
+   MOVIE GRID & CARDS
+   ===================== */
+#movie-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 2rem 0;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+@media (min-width: 600px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1400px) {
+  #movie-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.movie-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.movie-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.movie-card:focus {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--secondary), var(--secondary)30%);
+  transition: var(--transition);
+}
+
+.movie-card:hover .movie-poster {
+  transform: scale(1.05);
+}
+
+.movie-info {
+  padding: 1.5rem;
+}
+
+.movie-info h3 {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-year {
+  color: var(--secondary);
+  font-size: 0.875rem;
+  background: var(--primary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+}
+
+.movie-genre {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.movie-rating {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.movie-rating::before {
+  content: "⭐";
+}
+
+.movie-director {
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+.movie-director strong {
+  color: var(--text);
+}
+
+/* =====================
+   MOVIE DIALOG
+   ===================== */
+dialog#movie-dialog {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  max-width: min(95vw, 1000px);
+  max-height: 90vh;
+  background: var(--bg-card);
+  color: var(--secondary);
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+
+dialog#movie-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+#close-dialog {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+}
+
+#close-dialog:hover {
+  background: var(--error);
+  color: white;
+  transform: scale(1.1);
+}
+
+#dialog-content {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) 2fr;
+  gap: 2rem;
+  align-items: start;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+@media (max-width: 768px) {
+  #dialog-content {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    text-align: center;
+  }
+}
+
+#dialog-content img.movie-poster {
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 768px) {
+  #dialog-content img.movie-poster {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
+.dialog-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#dialog-content h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+#dialog-content .movie-year {
+  display: inline-block;
+  background: var(--secondary-light);
+  color: var(--primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+#dialog-content p {
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+#dialog-content p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+#dialog-content .movie-genre {
+  color: var(--secondary);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+#dialog-content .movie-rating {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.125rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  #dialog-content .movie-rating {
+    justify-content: center;
+  }
+}
+
+.movie-description {
+  color: var(--secondary) !important;
+  font-size: 1.1rem !important;
+  line-height: 1.7 !important;
+  margin-top: 1rem !important;
+  padding: 1rem;
+  background: var(--primary);
+  border-radius: var(--radius);
+  border-left: 4px solid var(--secondary);
+  font-style: italic;
+}
+
+/* Clear Filters Button */
+#clear-filters {
+  background: linear-gradient(135deg, var(--error) 0%, #c62828 100%);
+  color: white;
+  border: none;
+  border-radius: calc(var(--radius) * 0.5);
+  padding: 0.875rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow);
+}
+
+#clear-filters:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  background: linear-gradient(135deg, #c62828 0%, #b71c1c 100%);
+}
+
+#clear-filters:active {
+  transform: translateY(0);
+}
+
+#clear-filters:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.3);
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+.btn-text {
+  font-size: 0.95rem;
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text);
+  font-size: 1.2rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+}
+
+/* =====================
+   RESPONSIVE FILTERBAR
+   ===================== */
+@media (max-width: 900px) {
+  .filter-row-main {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .filter-row-ranges {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  #clear-filters {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .filterbar {
+    padding: 1rem;
+  }
+
+  .range-inputs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .range-separator {
+    transform: rotate(90deg);
+  }
+
+  #clear-filters {
+    padding: 1rem;
+    width: 100%;
+  }
+}
+
+/* =====================
+   RESPONSIVE & ACCESSIBILITY
+   ===================== */
+@media (max-width: 480px) {
+  #movie-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .movie-card {
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  header h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* Focus styles for keyboard navigation */
+.movie-card:focus-visible,
+#close-dialog:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+  .movie-year {
+    background: var(--primary);
+    color: var(--secondary);
+  }
+  #dialog-content .movie-year {
+    background: var(--primary);
+    color: var(--secondary);
+  }
+  #close-dialog {
+    background: rgba(23, 23, 23, 0.9);
+  }
+}
+
+/* Rotation Animation */
+@keyframes rotate360 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
