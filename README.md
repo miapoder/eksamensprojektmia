@@ -1,2 +1,0 @@
-# eksamensprojektmia
-Mit eksamens projekt
